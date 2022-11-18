@@ -1,4 +1,18 @@
 var bookList;
+var bookmarkList;
+var buyList;
+
+if (localStorage.getItem('bookmark-list')) {
+    bookmarkList = JSON.parse(localStorage.getItem('bookmark-list'))
+} else {
+    bookmarkList = [];
+}
+
+if (localStorage.getItem('buy-list')) {
+    buyList = JSON.parse(localStorage.getItem('buy-list'))
+} else {
+    buyList = [];
+}
 
 if (localStorage.getItem('book-list')) {
     bookList = JSON.parse(localStorage.getItem('book-list'))
@@ -31,7 +45,11 @@ if (localStorage.getItem('book-list')) {
         var buy = document.createElement("td");
         buy.innerText = "BUY"
         buy.setAttribute("class", "buy");
+        buy.style.cursor = "pointer"
         buy.addEventListener("click", function() {
+
+            buyList.push(e)
+            localStorage.setItem('buy-list', JSON.stringify(buyList));
             bookList.splice(i, 1);
             localStorage.setItem('book-list', JSON.stringify(bookList));
             window.location.reload();
@@ -41,8 +59,11 @@ if (localStorage.getItem('book-list')) {
         var bookmark = document.createElement("td");
         bookmark.innerText = "BOOKMARK"
         bookmark.setAttribute("class", "bookmark");
+        bookmark.style.cursor = "pointer"
         bookmark.addEventListener("click", function() {
-
+            
+            bookmarkList.push(e)
+            localStorage.setItem('bookmark-list', JSON.stringify(bookmarkList));
             bookList.splice(i, 1);
             localStorage.setItem('book-list', JSON.stringify(bookList));
             window.location.reload();
